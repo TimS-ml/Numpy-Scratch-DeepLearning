@@ -31,15 +31,15 @@ Check my other repos:
 
 # Quick Start
 ```python
-from scratch import deep_learning as dl
-from scratch.deep_learning import layers as lyr
-from scratch.deep_learning import optimizers as optm
-from scratch.deep_learning import loss_functions
+from scratchDL import deep_learning as dl
+from scratchDL.deep_learning import layers as lyr
+from scratchDL.deep_learning import optm
+from scratchDL.deep_learning import loss
 
 
 clf = dl.NeuralNetwork(
             optimizer=optm.Adam(),
-            loss=loss_functions.CrossEntropy,
+            loss=loss.CrossEntropy,
             validation_data=(X_test, y_test))
 
 clf.add(lyr.Conv2D(
