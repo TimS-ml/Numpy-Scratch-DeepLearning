@@ -28,6 +28,6 @@ setup(
     include_package_data=True,
     author='Tim Shen',
     install_requires=install_requires,
-    setup_requires=['numpy>=1.10', 'scipy>=0.17'],
+    setup_requires=['numpy>=1.10'],
     dependency_links=dependency_links,
     author_email='jshen44@fordham.edu')
