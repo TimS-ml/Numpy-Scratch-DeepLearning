@@ -1,8 +1,4 @@
 matplotlib
 numpy
-sklearn
-pandas
 progressbar33
 terminaltables
-gym
-pyglet

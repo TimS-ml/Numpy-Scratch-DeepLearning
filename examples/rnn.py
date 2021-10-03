@@ -2,13 +2,13 @@ from __future__ import print_function
 import matplotlib.pyplot as plt
 import numpy as np
 
-from scratchDLdeep_learning import NeuralNetwork
-from scratchDLutils import train_test_split, to_categorical, normalize, Plot
-from scratchDLutils import get_random_subsets, shuffle_data, accuracy_score
-from scratchDLdeep_learning.optm import StochasticGradientDescent, Adam, RMSprop, Adagrad, Adadelta
-from scratchDLdeep_learning.loss import CrossEntropy
-from scratchDLutils.misc import bar_widgets
-from scratchDLdeep_learning.layers import RNN, Activation
+from scratchDL.base import NeuralNetwork
+from scratchDL.utils import train_test_split, to_categorical, normalize, Plot
+from scratchDL.utils import get_random_subsets, shuffle_data, accuracy_score
+from scratchDL.base.optm import StochasticGradientDescent, Adam, RMSprop, Adagrad, Adadelta
+from scratchDL.base.loss import CrossEntropy
+from scratchDL.utils.misc import bar_widgets
+from scratchDL.base.layers import RNN, Activation
 
 
 def main():

@@ -5,14 +5,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Import helper functions
-from scratchDL.deep_learning import NeuralNetwork
+from scratchDL.base import NeuralNetwork
 from scratchDL.utils import train_test_split, to_categorical, normalize, Plot
 from scratchDL.utils import get_random_subsets, shuffle_data, accuracy_score
-from scratchDL.deep_learning.activation import Sigmoid, Softmax
-from scratchDL.deep_learning.optm import Adam
-from scratchDL.deep_learning.loss import CrossEntropy
+from scratchDL.base.activation import Sigmoid, Softmax
+from scratchDL.base.optm import Adam
+from scratchDL.base.loss import CrossEntropy
 from scratchDL.utils.misc import bar_widgets
-from scratchDL.deep_learning.layers import Dense, Dropout, Activation
+from scratchDL.base.layers import Dense, Dropout, Activation
 from sklearn import datasets
 
 from scratchDL.utils import train_test_split, to_categorical, normalize, accuracy_score, Plot

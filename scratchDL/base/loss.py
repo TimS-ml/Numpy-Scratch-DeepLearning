@@ -1,7 +1,7 @@
 from __future__ import division
 import numpy as np
 from scratchDL.utils import accuracy_score
-from scratchDL.deep_learning.activation_functions import Sigmoid
+from scratchDL.base.activation import Sigmoid
 
 
 class Loss(object):

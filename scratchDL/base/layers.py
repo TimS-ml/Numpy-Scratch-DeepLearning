@@ -2,8 +2,8 @@ from __future__ import print_function, division
 import math
 import numpy as np
 import copy
-from scratchDL.deep_learning.activation_functions import Sigmoid, ReLU, SoftPlus, LeakyReLU
-from scratchDL.deep_learning.activation_functions import TanH, ELU, SELU, Softmax
+from scratchDL.base.activation import Sigmoid, ReLU, SoftPlus, LeakyReLU
+from scratchDL.base.activation import TanH, ELU, SELU, Softmax
 
 
 class Layer(object):

@@ -5,8 +5,8 @@ import numpy as np
 
 # Import helper functions
 from scratchDL.utils import train_test_split, to_categorical, normalize, accuracy_score
-from scratchDL.deep_learning.activation import Sigmoid
-from scratchDL.deep_learning.loss import CrossEntropy, SquareLoss
+from scratchDL.base.activation import Sigmoid
+from scratchDL.base.loss import CrossEntropy, SquareLoss
 from scratchDL.utils import Plot
 from scratchDL.utils.misc import bar_widgets
 import progressbar

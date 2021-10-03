@@ -8,6 +8,7 @@
 `?888P' `?888P'd88'     `?88P'`88b  `?8b  `?888P'd88'   88b  
 ```
 
+
 # About this repo
 I want to run machine learning and deep leanring on my arm devices for fun (iPad, Android Phone, Raspberry pi)
 
@@ -31,10 +32,10 @@ Check my other repos:
 
 # Quick Start
 ```python
-from scratchDL import deep_learning as dl
-from scratchDL.deep_learning import layers as lyr
-from scratchDL.deep_learning import optm
-from scratchDL.deep_learning import loss
+from scratchDL import base as dl
+from scratchDL.base import layers as lyr
+from scratchDL.base import optm
+from scratchDL.base import loss
 
 
 clf = dl.NeuralNetwork(
@@ -69,6 +70,13 @@ clf.add(lyr.Activation('softmax'))
 ```
 
 
+# Data Inputs
+You can find dataset here:
+- `sklearn.datasets`
+- `torch`, `torchtext`, `torchvision`
+- `gym`
+- `pyglet`
+
 
 # TODO
 - [ ] Parallel Programming with numpy and scipy
@@ -82,6 +90,6 @@ clf.add(lyr.Activation('softmax'))
   - [ ] Update `setup.py` with `setup_require` and `extras_require`
 - [ ] Roughly compatible with PyTorch and sk-learn
   - [ ] Function name, operations, forward, backward etc.
-    - [ ] Re-write implementations of `scratch.deep_learning`
+    - [ ] Re-write implementations of `scratch.base`
 - [ ] PyOpenCL or CuPy for Nvidia and AMD GPU
   - Maybe M1 and Android GPU in the future...

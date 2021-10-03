@@ -5,10 +5,10 @@ import numpy as np
 
 from scratchDL.supervised_learning import Neuroevolution
 from scratchDL.utils import train_test_split, to_categorical, normalize, Plot
-from scratchDL.deep_learning import NeuralNetwork
-from scratchDL.deep_learning.layers import Activation, Dense
-from scratchDL.deep_learning.loss import CrossEntropy
-from scratchDL.deep_learning.optm import Adam
+from scratchDL.base import NeuralNetwork
+from scratchDL.base.layers import Activation, Dense
+from scratchDL.base.loss import CrossEntropy
+from scratchDL.base.optm import Adam
 
 
 def main():

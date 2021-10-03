@@ -5,15 +5,15 @@ import math
 import numpy as np
 
 # Import helper functions
-from scratchDL.deep_learning import NeuralNetwork
+from scratchDL.base import NeuralNetwork
 from scratchDL.utils import train_test_split, to_categorical, normalize
 from scratchDL.utils import get_random_subsets, shuffle_data, Plot
 from scratchDL.utils.data_operation import accuracy_score
-from scratchDL.deep_learning.optm import StochasticGradientDescent, Adam, RMSprop, Adagrad, Adadelta
-from scratchDL.deep_learning.loss import CrossEntropy
+from scratchDL.base.optm import StochasticGradientDescent, Adam, RMSprop, Adagrad, Adadelta
+from scratchDL.base.loss import CrossEntropy
 from scratchDL.utils.misc import bar_widgets
-from scratchDL.deep_learning.layers import Dense, Dropout, Conv2D, Flatten, Activation, MaxPooling2D
-from scratchDL.deep_learning.layers import AveragePooling2D, ZeroPadding2D, BatchNormalization, RNN
+from scratchDL.base.layers import Dense, Dropout, Conv2D, Flatten, Activation, MaxPooling2D
+from scratchDL.base.layers import AveragePooling2D, ZeroPadding2D, BatchNormalization, RNN
 
 
 def main():

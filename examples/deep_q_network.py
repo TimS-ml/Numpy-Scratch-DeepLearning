@@ -1,10 +1,10 @@
 from __future__ import print_function
 import numpy as np
 from scratchDL.utils import to_categorical
-from scratchDL.deep_learning.optm import Adam
-from scratchDL.deep_learning.loss import SquareLoss
-from scratchDL.deep_learning.layers import Dense, Dropout, Flatten, Activation, Reshape, BatchNormalization
-from scratchDL.deep_learning import NeuralNetwork
+from scratchDL.base.optm import Adam
+from scratchDL.base.loss import SquareLoss
+from scratchDL.base.layers import Dense, Dropout, Flatten, Activation, Reshape, BatchNormalization
+from scratchDL.base import NeuralNetwork
 from scratchDL.reinforcement_learning import DeepQNetwork
 
 
