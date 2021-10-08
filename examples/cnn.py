@@ -1,27 +1,21 @@
 from __future__ import print_function
-from sklearn import datasets
-import matplotlib.pyplot as plt
+
 import math
 import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
 
-# Import helper functions
+from scratchDL import base as dl
+from scratchDL.base import layers as lyr
+from scratchDL.base import optm
+from scratchDL.base import loss
 from scratchDL.base import NeuralNetwork
-from scratchDL.utils import train_test_split, to_categorical, normalize
-from scratchDL.utils import get_random_subsets, shuffle_data, Plot
-from scratchDL.utils.data_operation import accuracy_score
-from scratchDL.base.optm import StochasticGradientDescent, Adam, RMSprop, Adagrad, Adadelta
-from scratchDL.base.loss import CrossEntropy
-from scratchDL.utils.misc import bar_widgets
-from scratchDL.base.layers import Dense, Dropout, Conv2D, Flatten, Activation, MaxPooling2D
-from scratchDL.base.layers import AveragePooling2D, ZeroPadding2D, BatchNormalization, RNN
+
+from scratchDL.utils import train_test_split, to_categorical
+from scratchDL.utils import Plot
 
 
 def main():
-
-    #----------
-    # Conv Net
-    #----------
-
     optimizer = Adam()
 
     data = datasets.load_digits()
@@ -40,31 +34,35 @@ def main():
     X_train = X_train.reshape((-1, 1, 8, 8))
     X_test = X_test.reshape((-1, 1, 8, 8))
 
-    clf = NeuralNetwork(optimizer=optimizer,
-                        loss=CrossEntropy,
-                        validation_data=(X_test, y_test))
-
-    clf.add(
-        Conv2D(n_filters=16,
-               filter_shape=(3, 3),
-               stride=1,
-               input_shape=(1, 8, 8),
-               padding='same'))
-    clf.add(Activation('relu'))
-    clf.add(Dropout(0.25))
-    clf.add(BatchNormalization())
-    clf.add(Conv2D(n_filters=32, filter_shape=(3, 3), stride=1,
-                   padding='same'))
-    clf.add(Activation('relu'))
-    clf.add(Dropout(0.25))
-    clf.add(BatchNormalization())
-    clf.add(Flatten())
-    clf.add(Dense(256))
-    clf.add(Activation('relu'))
-    clf.add(Dropout(0.4))
-    clf.add(BatchNormalization())
-    clf.add(Dense(10))
-    clf.add(Activation('softmax'))
+    clf = dl.NeuralNetwork(
+                optimizer=optm.Adam(),
+                loss=loss.CrossEntropy,
+                validation_data=(X_test, y_test))
+    
+    clf.add(lyr.Conv2D(
+                  n_filters=16,
+                  filter_shape=(3, 3),
+                  stride=1,
+                  input_shape=(1, 8, 8),
+                  padding='same'))
+    clf.add(lyr.Activation('relu'))
+    clf.add(lyr.Dropout(0.25))
+    clf.add(lyr.BatchNormalization())
+    clf.add(lyr.Conv2D(
+                  n_filters=32, 
+                  filter_shape=(3, 3), 
+                  stride=1,
+                  padding='same'))
+    clf.add(lyr.Activation('relu'))
+    clf.add(lyr.Dropout(0.25))
+    clf.add(lyr.BatchNormalization())
+    clf.add(lyr.Flatten())
+    clf.add(lyr.Dense(256))
+    clf.add(lyr.Activation('relu'))
+    clf.add(lyr.Dropout(0.4))
+    clf.add(lyr.BatchNormalization())
+    clf.add(lyr.Dense(10))
+    clf.add(lyr.Activation('softmax'))
 
     print()
     clf.summary(name="ConvNet")

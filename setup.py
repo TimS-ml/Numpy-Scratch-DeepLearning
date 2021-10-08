@@ -19,7 +19,7 @@ setup(
     name='scratchDL',
     version=__version__,
     description=
-    'Python implementations of some of the fundamental Machine Learning models and algorithms from scratchDL.',
+    'Numpy implementations of Deep Learning from scratch.',
     url='https://github.com/TimS-ml/Scratch-DL',
     download_url=
     'https://github.com/TimS-ml/Scratch-DL/tarball/master',

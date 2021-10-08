@@ -1,4 +1,4 @@
-matplotlib
 numpy
-progressbar33
+matplotlib
+tqdm
 terminaltables

@@ -1,13 +1,14 @@
 from __future__ import print_function, division
-from terminaltables import AsciiTable
+
 import numpy as np
-import progressbar
+from tqdm import tqdm
+from terminaltables import AsciiTable
+
 from scratchDL.utils import batch_iterator
-from scratchDL.utils.misc import bar_widgets
 
 
 class NeuralNetwork():
-    """Neural Network. Deep Learning base model.
+    """Neural Network base
 
     Parameters:
     -----------
@@ -24,7 +25,6 @@ class NeuralNetwork():
         self.layers = []
         self.errors = {"training": [], "validation": []}
         self.loss_function = loss()
-        self.progressbar = progressbar.ProgressBar(widgets=bar_widgets)
 
         self.val_set = None
         if validation_data:
@@ -72,7 +72,7 @@ class NeuralNetwork():
 
     def fit(self, X, y, n_epochs, batch_size):
         """ Trains the model for a fixed number of epochs """
-        for _ in self.progressbar(range(n_epochs)):
+        for _ in tqdm(range(n_epochs)):
 
             batch_error = []
             for X_batch, y_batch in batch_iterator(X, y,

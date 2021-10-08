@@ -1,32 +1,18 @@
 from __future__ import print_function
-from sklearn import datasets
+
 import math
 import numpy as np
+from tqdm import tqdm
+from sklearn import datasets
 
-# Import helper functions
 from scratchDL.utils import train_test_split, to_categorical, normalize, accuracy_score
 from scratchDL.base.activation import Sigmoid
 from scratchDL.base.loss import CrossEntropy, SquareLoss
 from scratchDL.utils import Plot
-from scratchDL.utils.misc import bar_widgets
-import progressbar
 
 
 class Perceptron():
     """The Perceptron. One layer neural network classifier.
-
-    Parameters:
-    -----------
-    n_iterations: float
-        The number of training iterations the algorithm will tune the weights for.
-    activation_function: class
-        The activation that shall be used for each neuron.
-        Possible choices: Sigmoid, ExpLU, ReLU, LeakyReLU, SoftPlus, TanH
-    loss: class
-        The loss function used to assess the model's performance.
-        Possible choices: SquareLoss, CrossEntropy
-    learning_rate: float
-        The step length that will be used when updating the weights.
     """
     def __init__(self,
                  n_iterations=20000,
@@ -37,7 +23,6 @@ class Perceptron():
         self.learning_rate = learning_rate
         self.loss = loss()
         self.activation_func = activation_function()
-        self.progressbar = progressbar.ProgressBar(widgets=bar_widgets)
 
     def fit(self, X, y):
         n_samples, n_features = np.shape(X)
@@ -48,7 +33,7 @@ class Perceptron():
         self.W = np.random.uniform(-limit, limit, (n_features, n_outputs))
         self.w0 = np.zeros((1, n_outputs))
 
-        for i in self.progressbar(range(self.n_iterations)):
+        for i in tqdm(range(self.n_iterations)):
             # Calculate outputs
             linear_output = X.dot(self.W) + self.w0
             y_pred = self.activation_func(linear_output)
