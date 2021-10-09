@@ -72,7 +72,9 @@ class NeuralNetwork():
 
     def fit(self, X, y, n_epochs, batch_size):
         """ Trains the model for a fixed number of epochs """
-        for _ in tqdm(range(n_epochs)):
+        for epo in range(n_epochs):
+            if epo % 5 == 0:
+                print('Current: {}, %{}'.format(epo, 100 * epo / n_epochs))
 
             batch_error = []
             for X_batch, y_batch in batch_iterator(X, y,
