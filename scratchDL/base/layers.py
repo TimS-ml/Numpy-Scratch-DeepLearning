@@ -673,10 +673,9 @@ class Activation(Layer):
         return self.input_shape
 
 
-# Method which calculates the padding based on the specified output shape and the
-# shape of the filters
+# Method which calculates the padding 
+# based on the specified output shape and the shape of the filters
 def determine_padding(filter_shape, output_shape="same"):
-
     # No padding
     if output_shape == "valid":
         return (0, 0), (0, 0)
@@ -731,8 +730,8 @@ def image_to_column(images, filter_shape, stride, output_shape='same'):
     images_padded = np.pad(images, ((0, 0), (0, 0), pad_h, pad_w),
                            mode='constant')
 
-    # Calculate the indices where the dot products are to be applied between weights
-    # and the image
+    # Calculate the indices where the dot products are to be applied 
+    # between weights and the image
     k, i, j = get_im2col_indices(images.shape, filter_shape, (pad_h, pad_w),
                                  stride)
 
@@ -761,8 +760,8 @@ def column_to_image(cols,
     images_padded = np.zeros(
         (batch_size, channels, height_padded, width_padded))
 
-    # Calculate the indices where the dot products are applied between weights
-    # and the image
+    # Calculate the indices where the dot products are applied 
+    # between weights and the image
     k, i, j = get_im2col_indices(images_shape, filter_shape, (pad_h, pad_w),
                                  stride)
 
