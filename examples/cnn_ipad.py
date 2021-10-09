@@ -1,10 +1,15 @@
 from __future__ import print_function
 
 from sys import path as syspath
-from os import path as ospath
-syspath.append(ospath.join(ospath.expanduser('~'), 'scratchDL'))
+import os
+# import pathlib
 
-import numpy as np
+# packagePath = pathlib.Path(__file__).parent.resolve()
+packagePath = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
+
+print(packagePath)
+syspath.append(packagePath)
+
 import gzip
 import requests
 import io
@@ -12,7 +17,6 @@ import io
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import datasets
 
 from scratchDL import base as dl
 from scratchDL.base import layers as lyr
