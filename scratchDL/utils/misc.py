@@ -22,9 +22,9 @@ class Plot():
         # plt.rc('figure', figsize=figsize, dpi=dpi)
         plt.rc('font', size=15)
 
-        plt.register_cmap(name='viridis', cmap=cmaps.viridis)
+        plt.register_cmap(name='magma', cmap=cmaps.magma)
         
-        # self.cmap = plt.set_cmap(cmaps.viridis)
+        # self.cmap = plt.set_cmap(cmaps.magma)
         self.cmap = plt.get_cmap('magma')
 
     def _transform(self, X, dim):
