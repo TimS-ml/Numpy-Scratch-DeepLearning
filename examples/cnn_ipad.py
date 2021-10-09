@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from sys import path as syspath
 from os import path as ospath
 syspath.append(ospath.join(ospath.expanduser('~'), 'scratchDL'))
@@ -6,9 +8,6 @@ import numpy as np
 import gzip
 import requests
 import io
-
-
-from __future__ import print_function
 
 import math
 import numpy as np
@@ -26,17 +25,14 @@ from scratchDL.utils import Plot
 
 
 def main():
-    optimizer = Adam()
-
-
     url = 'https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/datasets/data/digits.csv.gz?raw=true'
     
     f = requests.get(url).content
     data = np.loadtxt(gzip.open(io.BytesIO(f), 'rt'),
                       delimiter=',', dtype=np.float32)
 
-    X = data[:-1]
-    y = data[-1]
+    X = data[:, :-1]
+    y = data[:, -1]
 
     # Convert to one-hot encoding
     y = to_categorical(y.astype('int'))

@@ -16,8 +16,6 @@ from scratchDL.utils import Plot
 
 
 def main():
-    optimizer = Adam()
-
     data = datasets.load_digits()
     X = data.data
     y = data.target
