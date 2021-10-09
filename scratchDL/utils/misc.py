@@ -11,7 +11,7 @@ from scratchDL.utils.data_manipulation import standardize
 
 class Plot():
     def __init__(self):
-        self.cmap = plt.get_cmap('viridis')
+        self.cmap = plt.get_cmap('magma')
 
     def _transform(self, X, dim):
         covariance = calculate_covariance_matrix(X)
