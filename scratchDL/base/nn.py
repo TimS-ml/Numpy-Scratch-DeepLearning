@@ -2,7 +2,6 @@ from __future__ import print_function, division
 
 import numpy as np
 # from tqdm import tqdm
-from terminaltables import AsciiTable
 
 from scratchDL.utils import batch_iterator
 
@@ -106,9 +105,11 @@ class NeuralNetwork():
 
     def summary(self, name="Model Summary"):
         # Print model name
-        print(AsciiTable([[name]]).table)
+        print(name)
+
         # Network input shape (first layer's input shape)
         print("Input Shape: %s" % str(self.layers[0].input_shape))
+
         # Iterate through network and get each layer's configuration
         table_data = [["Layer Type", "Parameters", "Output Shape"]]
         tot_params = 0
@@ -118,8 +119,12 @@ class NeuralNetwork():
             out_shape = layer.output_shape()
             table_data.append([layer_name, str(params), str(out_shape)])
             tot_params += params
+
         # Print network configuration table
-        print(AsciiTable(table_data).table)
+        for tup in table_data:
+            # print(''.join(x.ljust(25) for x in tup))
+            print(tup[0].ljust(25), tup[1].ljust(15), tup[2])
+        
         print("Total Parameters: %d\n" % tot_params)
 
     def predict(self, X):
