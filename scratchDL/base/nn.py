@@ -1,7 +1,7 @@
 from __future__ import print_function, division
 
 import numpy as np
-from tqdm import tqdm
+# from tqdm import tqdm
 from terminaltables import AsciiTable
 
 from scratchDL.utils import batch_iterator
