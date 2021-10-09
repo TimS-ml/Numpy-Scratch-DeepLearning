@@ -83,7 +83,7 @@ def main():
     print()
     clf.summary(name='ConvNet')
 
-    train_err, val_err = clf.fit(X_train, y_train, n_epochs=50, batch_size=256)
+    train_err, val_err = clf.fit(X_train, y_train, n_epochs=10, batch_size=256)
 
     # Training and validation error plot
     n = len(train_err)

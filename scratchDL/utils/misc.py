@@ -1,3 +1,5 @@
+# https://github.com/BIDS/colormap
+
 # from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import matplotlib.cm as cmx
@@ -7,10 +9,22 @@ import numpy as np
 from scratchDL.utils.data_operation import calculate_covariance_matrix
 from scratchDL.utils.data_operation import calculate_correlation_matrix
 from scratchDL.utils.data_manipulation import standardize
+import scratchDL.utils.colormaps as cmaps
 
 
 class Plot():
     def __init__(self):
+        plt.style.use(['dark_background', 'bmh'])
+        plt.rc('axes', facecolor='k')
+        plt.rc('figure', facecolor='k')
+        # figsize=(10, 10)
+        # dpi=100
+        # plt.rc('figure', figsize=figsize, dpi=dpi)
+        plt.rc('font', size=15)
+
+        plt.register_cmap(name='viridis', cmap=cmaps.viridis)
+        
+        # self.cmap = plt.set_cmap(cmaps.viridis)
         self.cmap = plt.get_cmap('magma')
 
     def _transform(self, X, dim):
