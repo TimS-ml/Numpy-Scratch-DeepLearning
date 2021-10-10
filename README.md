@@ -12,7 +12,7 @@
 # About this repo
 I want to run machine learning and deep leanring on my arm devices for fun (iPad, Android Phone, Raspberry pi)
 
-The ultimate goal is to achieve something like [numpy-ml](https://github.com/ddbourgin/numpy-ml) and [tinygrad](https://github.com/geohot/tinygrad)
+The ultimate goal is to achieve something like [numpy-ml](https://github.com/ddbourgin/numpy-ml/tree/master/numpy_ml/neural_nets) and [tinygrad](https://github.com/geohot/tinygrad)
 
 References:
 - https://github.com/SethHWeidman/DLFS_code/tree/master/lincoln/lincoln
@@ -85,6 +85,7 @@ You can find dataset here:
   - [ ] Param / NonParam Layers
   - [ ] PyOpenCL or CuPy for Nvidia and AMD GPU
     - [ ] `scratchDL.Tensor` and `Tensor.gpu`
+    - check: https://github.com/geohot/tinygrad/blob/master/tinygrad/ops_gpu.py
   - [ ] CPU Parallel Programming with numpy and scipy
 - [ ] Add more models
   - [ ] Transformer
