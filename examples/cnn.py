@@ -16,23 +16,24 @@ from scratchDL.utils import train_test_split, to_categorical
 from scratchDL.utils import Plot
 
 
-def main():
-    data = datasets.load_digits()
-    X = data.data
-    y = data.target
+data = datasets.load_digits()
+X = data.data
+y = data.target
 
-    # Convert to one-hot encoding
-    y = to_categorical(y.astype('int'))
+# Convert to one-hot encoding
+y = to_categorical(y.astype('int'))
 
-    X_train, X_test, y_train, y_test = train_test_split(X,
-                                                        y,
-                                                        test_size=0.4,
-                                                        seed=1)
+X_train, X_test, y_train, y_test = train_test_split(X,
+                                                    y,
+                                                    test_size=0.4,
+                                                    seed=1)
 
-    # Reshape X to (n_samples, channels, height, width)
-    X_train = X_train.reshape((-1, 1, 8, 8))
-    X_test = X_test.reshape((-1, 1, 8, 8))
+# Reshape X to (n_samples, channels, height, width)
+X_train = X_train.reshape((-1, 1, 8, 8))
+X_test = X_test.reshape((-1, 1, 8, 8))
 
+
+def main(X_train, X_test, y_train, y_test):
     clf = dl.NeuralNetwork(
                 optimizer=optm.Adam(),  # default lr is 0.001
                 loss=loss.CrossEntropy,
