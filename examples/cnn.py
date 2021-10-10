@@ -9,6 +9,7 @@ from scratchDL import base as dl
 from scratchDL.base import layers as lyr
 from scratchDL.base import optm
 from scratchDL.base import loss
+from scratchDL.base import activation as act
 from scratchDL.base import NeuralNetwork
 
 from scratchDL.utils import train_test_split, to_categorical
@@ -43,7 +44,7 @@ def main():
                   stride=1,
                   input_shape=(1, 8, 8),
                   padding='same'))
-    clf.add(lyr.Activation('relu'))
+    clf.add(lyr.Activation(act.ReLU))
     clf.add(lyr.Dropout(0.25))
     clf.add(lyr.BatchNorm())
     clf.add(lyr.Conv2D(
@@ -51,21 +52,21 @@ def main():
                   filter_shape=(3, 3), 
                   stride=1,
                   padding='same'))
-    clf.add(lyr.Activation('relu'))
+    clf.add(lyr.Activation(act.ReLU))
     clf.add(lyr.Dropout(0.25))
     clf.add(lyr.BatchNorm())
     clf.add(lyr.Flatten())
     clf.add(lyr.Dense(256))
-    clf.add(lyr.Activation('relu'))
+    clf.add(lyr.Activation(act.ReLU))
     clf.add(lyr.Dropout(0.4))
     clf.add(lyr.BatchNorm())
     clf.add(lyr.Dense(10))
-    clf.add(lyr.Activation('softmax'))
+    clf.add(lyr.Activation(act.Softmax))
 
     print()
     clf.summary(name='ConvNet')
 
-    train_err, val_err = clf.fit(X_train, y_train, n_epochs=50, batch_size=256)
+    train_err, val_err = clf.fit(X_train, y_train, n_epochs=10, batch_size=256)
 
     # Training and validation error plot
     n = len(train_err)

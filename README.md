@@ -80,8 +80,7 @@ You can find dataset here:
 
 # TODO
 - [ ] Re-Design
-  - [ ] Batch
-  - [ ] Channel
+  - [ ] Batch / Channel / 1-dim shape
   - [ ] Param / NonParam Layers
   - [ ] PyOpenCL or CuPy for Nvidia and AMD GPU
     - [ ] `scratchDL.Tensor` and `Tensor.gpu`

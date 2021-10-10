@@ -63,7 +63,7 @@ class NeuralNetwork():
         loss = np.mean(self.loss_function.loss(y, y_pred))
         acc = self.loss_function.acc(y, y_pred)
         # Calculate the gradient of the loss function wrt y_pred
-        loss_grad = self.loss_function.gradient(y, y_pred)
+        loss_grad = self.loss_function.grad(y, y_pred)
         # Backpropagate. Update weights
         self._backward_pass(loss_grad=loss_grad)
 

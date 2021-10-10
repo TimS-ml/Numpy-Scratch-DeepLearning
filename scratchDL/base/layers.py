@@ -2,8 +2,7 @@ from __future__ import print_function, division
 import math
 import numpy as np
 import copy
-from scratchDL.base.activation import Sigmoid, ReLU, SoftPlus, LeakyReLU
-from scratchDL.base.activation import TanH, ELU, SELU, Softmax
+# from scratchDL.base.activation import *
 
 
 class Layer(object):
@@ -121,7 +120,7 @@ class RNN(Layer):
                  input_shape=None):
         self.input_shape = input_shape
         self.n_units = n_units
-        self.activation = activation_functions[activation]()
+        self.activation = act_functions[activation]()
         self.trainable = True
         self.bptt_trunc = bptt_trunc
         self.W = None  # Weight of the previous state
@@ -182,7 +181,7 @@ class RNN(Layer):
             grad_V += accum_grad[:, t].T.dot(self.states[:, t])
             # Calculate the gradient w.r.t the state input
             grad_wrt_state = accum_grad[:, t].dot(
-                self.V) * self.activation.gradient(self.state_input[:, t])
+                self.V) * self.activation.grad(self.state_input[:, t])
             # Gradient w.r.t the layer input
             accum_grad_next[:, t] = grad_wrt_state.dot(self.U)
             # Update gradient w.r.t W and U by backprop. from time step t for at most
@@ -192,7 +191,7 @@ class RNN(Layer):
                 grad_W += grad_wrt_state.T.dot(self.states[:, t_ - 1])
                 # Calculate gradient w.r.t previous state
                 grad_wrt_state = grad_wrt_state.dot(
-                    self.W) * self.activation.gradient(
+                    self.W) * self.activation.grad(
                         self.state_input[:, t_ - 1])
 
         # Update weights
@@ -632,40 +631,27 @@ class Dropout(Layer):
         return self.input_shape
 
 
-activation_functions = {
-    'relu': ReLU,
-    'sigmoid': Sigmoid,
-    'selu': SELU,
-    'elu': ELU,
-    'softmax': Softmax,
-    'leaky_relu': LeakyReLU,
-    'tanh': TanH,
-    'softplus': SoftPlus
-}
-
-
 class Activation(Layer):
     """A layer that applies an activation operation to the input.
 
     Parameters:
     -----------
-    name: string
-        The name of the activation function that will be used.
+    act_func: class
+        The activation function that will be used.
     """
-    def __init__(self, name):
-        self.activation_name = name
-        self.activation_func = activation_functions[name]()
+    def __init__(self, act_func):
+        self.act_func = act_func()
         self.trainable = True
 
     def layer_name(self):
-        return "Activation (%s)" % (self.activation_func.__class__.__name__)
+        return "Activation (%s)" % (self.act_func.__class__.__name__)
 
     def forward_pass(self, X, training=True):
         self.layer_input = X
-        return self.activation_func(X)
+        return self.act_func(X)
 
     def backward_pass(self, accum_grad):
-        return accum_grad * self.activation_func.gradient(self.layer_input)
+        return accum_grad * self.act_func.grad(self.layer_input)
 
     def output_shape(self):
         return self.input_shape

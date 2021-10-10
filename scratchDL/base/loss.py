@@ -1,14 +1,14 @@
 from __future__ import division
+
 import numpy as np
 from scratchDL.utils import accuracy_score
-from scratchDL.base.activation import Sigmoid
 
 
 class Loss(object):
     def loss(self, y_true, y_pred):
         return NotImplementedError()
 
-    def gradient(self, y, y_pred):
+    def grad(self, y, y_pred):
         raise NotImplementedError()
 
     def acc(self, y, y_pred):
@@ -22,7 +22,7 @@ class SquareLoss(Loss):
     def loss(self, y, y_pred):
         return 0.5 * np.power((y - y_pred), 2)
 
-    def gradient(self, y, y_pred):
+    def grad(self, y, y_pred):
         return -(y - y_pred)
 
 
@@ -38,7 +38,7 @@ class CrossEntropy(Loss):
     def acc(self, y, p):
         return accuracy_score(np.argmax(y, axis=1), np.argmax(p, axis=1))
 
-    def gradient(self, y, p):
+    def grad(self, y, p):
         # Avoid division by zero
         p = np.clip(p, 1e-15, 1 - 1e-15)
         return -(y / p) + (1 - y) / (1 - p)
