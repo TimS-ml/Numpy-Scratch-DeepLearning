@@ -45,7 +45,7 @@ def main():
                   padding='same'))
     clf.add(lyr.Activation('relu'))
     clf.add(lyr.Dropout(0.25))
-    clf.add(lyr.BatchNormalization())
+    clf.add(lyr.BatchNorm())
     clf.add(lyr.Conv2D(
                   n_filters=32, 
                   filter_shape=(3, 3), 
@@ -53,12 +53,12 @@ def main():
                   padding='same'))
     clf.add(lyr.Activation('relu'))
     clf.add(lyr.Dropout(0.25))
-    clf.add(lyr.BatchNormalization())
+    clf.add(lyr.BatchNorm())
     clf.add(lyr.Flatten())
     clf.add(lyr.Dense(256))
     clf.add(lyr.Activation('relu'))
     clf.add(lyr.Dropout(0.4))
-    clf.add(lyr.BatchNormalization())
+    clf.add(lyr.BatchNorm())
     clf.add(lyr.Dense(10))
     clf.add(lyr.Activation('softmax'))
 

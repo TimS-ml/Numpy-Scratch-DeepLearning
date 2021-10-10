@@ -51,7 +51,7 @@ clf.add(lyr.Conv2D(
               padding='same'))
 clf.add(lyr.Activation('relu'))
 clf.add(lyr.Dropout(0.25))
-clf.add(lyr.BatchNormalization())
+clf.add(lyr.BBatchNorm())
 clf.add(lyr.Conv2D(
               n_filters=32, 
               filter_shape=(3, 3), 
@@ -59,12 +59,12 @@ clf.add(lyr.Conv2D(
               padding='same'))
 clf.add(lyr.Activation('relu'))
 clf.add(lyr.Dropout(0.25))
-clf.add(lyr.BatchNormalization())
+clf.add(lyr.BBatchNorm())
 clf.add(lyr.Flatten())
 clf.add(lyr.Dense(256))
 clf.add(lyr.Activation('relu'))
 clf.add(lyr.Dropout(0.4))
-clf.add(lyr.BatchNormalization())
+clf.add(lyr.BBatchNorm())
 clf.add(lyr.Dense(10))
 clf.add(lyr.Activation('softmax'))
 ```
@@ -79,17 +79,22 @@ You can find dataset here:
 
 
 # TODO
-- [ ] Parallel Programming with numpy and scipy
-  <!-- - https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html -->
+- [ ] Re-Design
+  - [ ] Batch
+  - [ ] Channel
+  - [ ] Param / NonParam Layers
+  - [ ] PyOpenCL or CuPy for Nvidia and AMD GPU
+    - [ ] `scratchDL.Tensor` and `Tensor.gpu`
+  - [ ] CPU Parallel Programming with numpy and scipy
 - [ ] Add more models
   - [ ] Transformer
   - [ ] VGG
   - [ ] Inception
   - [ ] Efficientnet
-- [ ] Reduce package usage
-  - [ ] Update `setup.py` with `setup_require` and `extras_require`
+- [x] Reduce package usage
+  - [x] Update `setup.py` with `setup_require` and `extras_require`
+
+## Pending
 - [ ] Roughly compatible with PyTorch and sk-learn
   - [ ] Function name, operations, forward, backward etc.
-    - [ ] Re-write implementations of `scratch.base`
-- [ ] PyOpenCL or CuPy for Nvidia and AMD GPU
-  - Maybe M1 and Android GPU in the future...
+    - [ ] Re-write implementations of `scratchDL.base`

@@ -25,7 +25,7 @@ class Layer(object):
         raise NotImplementedError()
 
     def backward_pass(self, accum_grad):
-        """ Propogates the accumulated gradient backwards in the network.
+        """ Propogates the [accumulated] gradient backwards in the network.
         If the has trainable weights then these weights are also tuned in this method.
         As input (accum_grad) it receives the gradient with respect to the output of the layer and
         returns the gradient with respect to the output of the previous layer. """
@@ -311,7 +311,7 @@ class Conv2D(Layer):
         return self.n_filters, int(output_height), int(output_width)
 
 
-class BatchNormalization(Layer):
+class BatchNorm(Layer):
     """Batch normalization.
     """
     def __init__(self, momentum=0.99):
@@ -333,7 +333,6 @@ class BatchNormalization(Layer):
         return np.prod(self.gamma.shape) + np.prod(self.beta.shape)
 
     def forward_pass(self, X, training=True):
-
         # Initialize running mean and variance if first run
         if self.running_mean is None:
             self.running_mean = np.mean(X, axis=0)
@@ -360,7 +359,6 @@ class BatchNormalization(Layer):
         return output
 
     def backward_pass(self, accum_grad):
-
         # Save parameters used during the forward pass
         gamma = self.gamma
 

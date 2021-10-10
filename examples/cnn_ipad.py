@@ -2,10 +2,8 @@ from __future__ import print_function
 
 from sys import path as syspath
 import os
-# import pathlib
 
-# packagePath = pathlib.Path(__file__).parent.resolve()
-packagePath = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
+packagePath = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 print(packagePath)
 syspath.append(packagePath)
@@ -30,10 +28,11 @@ from scratchDL.utils import Plot
 
 def main():
     url = 'https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/datasets/data/digits.csv.gz?raw=true'
-    
+
     f = requests.get(url).content
     data = np.loadtxt(gzip.open(io.BytesIO(f), 'rt'),
-                      delimiter=',', dtype=np.float32)
+                      delimiter=',',
+                      dtype=np.float32)
 
     X = data[:, :-1]
     y = data[:, -1]
@@ -51,32 +50,30 @@ def main():
     X_test = X_test.reshape((-1, 1, 8, 8))
 
     clf = dl.NeuralNetwork(
-                optimizer=optm.Adam(),  # default lr is 0.001
-                loss=loss.CrossEntropy,
-                validation_data=(X_test, y_test))
-    
-    clf.add(lyr.Conv2D(
-                  n_filters=16,
-                  filter_shape=(3, 3),
-                  stride=1,
-                  input_shape=(1, 8, 8),
-                  padding='same'))
+        optimizer=optm.Adam(),  # default lr is 0.001
+        loss=loss.CrossEntropy,
+        validation_data=(X_test, y_test))
+
+    clf.add(
+        lyr.Conv2D(n_filters=16,
+                   filter_shape=(3, 3),
+                   stride=1,
+                   input_shape=(1, 8, 8),
+                   padding='same'))
     clf.add(lyr.Activation('relu'))
     clf.add(lyr.Dropout(0.25))
-    clf.add(lyr.BatchNormalization())
-    clf.add(lyr.Conv2D(
-                  n_filters=32, 
-                  filter_shape=(3, 3), 
-                  stride=1,
-                  padding='same'))
+    clf.add(lyr.BatchNorm())
+    clf.add(
+        lyr.Conv2D(n_filters=32, filter_shape=(3, 3), stride=1,
+                   padding='same'))
     clf.add(lyr.Activation('relu'))
     clf.add(lyr.Dropout(0.25))
-    clf.add(lyr.BatchNormalization())
+    clf.add(lyr.BatchNorm())
     clf.add(lyr.Flatten())
     clf.add(lyr.Dense(256))
     clf.add(lyr.Activation('relu'))
     clf.add(lyr.Dropout(0.4))
-    clf.add(lyr.BatchNormalization())
+    clf.add(lyr.BatchNorm())
     clf.add(lyr.Dense(10))
     clf.add(lyr.Activation('softmax'))
 

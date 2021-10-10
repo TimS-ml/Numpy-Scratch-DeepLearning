@@ -1,22 +1,24 @@
 from __future__ import print_function
-import matplotlib.pyplot as plt
-import numpy as np
 
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+from scratchDL import base as dl
+from scratchDL.base import layers as lyr
+from scratchDL.base import optm
+from scratchDL.base import loss
 from scratchDL.base import NeuralNetwork
-from scratchDL.utils import train_test_split, to_categorical, normalize, Plot
-from scratchDL.utils import get_random_subsets, shuffle_data, accuracy_score
-from scratchDL.base.optm import StochasticGradientDescent, Adam, RMSprop, Adagrad, Adadelta
-from scratchDL.base.loss import CrossEntropy
-from scratchDL.utils.misc import bar_widgets
-from scratchDL.base.layers import RNN, Activation
+
+from scratchDL.utils import train_test_split, to_categorical
+from scratchDL.utils import Plot
+
+from scratchDL.utils import accuracy_score
 
 
 def main():
-
-    optimizer = Adam()
-
     def gen_mult_ser(nums):
-        """ Method which generates multiplication series """
+        # Method which generates multiplication series 
         X = np.zeros([nums, 10, 61], dtype=float)
         y = np.zeros([nums, 10, 61], dtype=float)
         for i in range(nums):
@@ -28,7 +30,7 @@ def main():
         return X, y
 
     def gen_num_seq(nums):
-        """ Method which generates sequence of numbers """
+        # Method which generates sequence of numbers 
         X = np.zeros([nums, 10, 20], dtype=float)
         y = np.zeros([nums, 10, 20], dtype=float)
         for i in range(nums):
@@ -43,17 +45,25 @@ def main():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4)
 
     # Model definition
-    clf = NeuralNetwork(optimizer=optimizer, loss=CrossEntropy)
-    clf.add(RNN(10, activation="tanh", bptt_trunc=5, input_shape=(10, 61)))
-    clf.add(Activation('softmax'))
-    clf.summary("RNN")
+    clf = NeuralNetwork(
+        optimizer=optm.Adam(), 
+        loss=loss.CrossEntropy)
+
+    clf.add(lyr.RNN(
+                10, 
+                activation='tanh',
+                bptt_trunc=5, 
+                input_shape=(10, 61)))
+    clf.add(lyr.Activation('softmax'))
+
+    clf.summary('RNN')
 
     # Print a problem instance and the correct solution
     tmp_X = np.argmax(X_train[0], axis=1)
     tmp_y = np.argmax(y_train[0], axis=1)
-    print("Number Series Problem:")
-    print("X = [" + " ".join(tmp_X.astype("str")) + "]")
-    print("y = [" + " ".join(tmp_y.astype("str")) + "]")
+    print('Number Series Problem:')
+    print('X = [' + ' '.join(tmp_X.astype('str')) + ']')
+    print('y = [' + ' '.join(tmp_y.astype('str')) + ']')
     print()
 
     train_err, _ = clf.fit(X_train, y_train, n_epochs=500, batch_size=512)
@@ -63,26 +73,27 @@ def main():
     y_test = np.argmax(y_test, axis=2)
 
     print()
-    print("Results:")
+    print('Results:')
+
     for i in range(5):
         # Print a problem instance and the correct solution
         tmp_X = np.argmax(X_test[i], axis=1)
         tmp_y1 = y_test[i]
         tmp_y2 = y_pred[i]
-        print("X      = [" + " ".join(tmp_X.astype("str")) + "]")
-        print("y_true = [" + " ".join(tmp_y1.astype("str")) + "]")
-        print("y_pred = [" + " ".join(tmp_y2.astype("str")) + "]")
+        print('X      = [' + ' '.join(tmp_X.astype('str')) + ']')
+        print('y_true = [' + ' '.join(tmp_y1.astype('str')) + ']')
+        print('y_pred = [' + ' '.join(tmp_y2.astype('str')) + ']')
         print()
 
     accuracy = np.mean(accuracy_score(y_test, y_pred))
-    print("Accuracy:", accuracy)
+    print('Accuracy:', accuracy)
 
-    training = plt.plot(range(500), train_err, label="Training Error")
-    plt.title("Error Plot")
+    training = plt.plot(range(500), train_err, label='Training Error')
+    plt.title('Error Plot')
     plt.ylabel('Training Error')
     plt.xlabel('Iterations')
     plt.show()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
