@@ -11,10 +11,10 @@ class ActivationBase(object):
         return self.fn(x)
 
     def fn(self, x):
-        raise NotImplementedError
+        raise NotImplementedError()
 
     def grad(self, x):
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
 class Sigmoid(ActivationBase):
@@ -76,7 +76,7 @@ class ELU(ActivationBase):
 
 
 class SELU(ActivationBase):
-    # Reference : https://arxiv.org/abs/1706.02515,
+    # Reference : https://arxiv.org/abs/1706.02515
     # https://github.com/bioinf-jku/SNNs/blob/master/SelfNormalizingNetworks_MLP_MNIST.ipynb
     def __init__(self):
         self.alpha = 1.6732632423543772848170429916717

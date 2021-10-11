@@ -36,10 +36,12 @@ from scratchDL import base as dl
 from scratchDL.base import layers as lyr
 from scratchDL.base import optm
 from scratchDL.base import loss
+from scratchDL.base import activation as act
+from scratchDL.base import NeuralNetwork
 
 
 clf = dl.NeuralNetwork(
-            optimizer=optm.Adam(),
+            optimizer=optm.Adam(),  # default lr is 0.001
             loss=loss.CrossEntropy,
             validation_data=(X_test, y_test))
 
@@ -49,24 +51,24 @@ clf.add(lyr.Conv2D(
               stride=1,
               input_shape=(1, 8, 8),
               padding='same'))
-clf.add(lyr.Activation('relu'))
+clf.add(lyr.Activation(act.ReLU))
 clf.add(lyr.Dropout(0.25))
-clf.add(lyr.BBatchNorm())
+clf.add(lyr.BatchNorm())
 clf.add(lyr.Conv2D(
               n_filters=32, 
               filter_shape=(3, 3), 
               stride=1,
               padding='same'))
-clf.add(lyr.Activation('relu'))
+clf.add(lyr.Activation(act.ReLU))
 clf.add(lyr.Dropout(0.25))
-clf.add(lyr.BBatchNorm())
+clf.add(lyr.BatchNorm())
 clf.add(lyr.Flatten())
 clf.add(lyr.Dense(256))
-clf.add(lyr.Activation('relu'))
+clf.add(lyr.Activation(act.ReLU))
 clf.add(lyr.Dropout(0.4))
-clf.add(lyr.BBatchNorm())
+clf.add(lyr.BatchNorm())
 clf.add(lyr.Dense(10))
-clf.add(lyr.Activation('softmax'))
+clf.add(lyr.Activation(act.Softmax))
 ```
 
 
@@ -79,6 +81,8 @@ You can find dataset here:
 
 
 # TODO
+- [ ] Features
+  - [ ] Weight Init Func
 - [ ] Re-Design
   - [ ] Batch / Channel / 1-dim shape
   - [ ] Param / NonParam Layers

@@ -7,6 +7,7 @@ from scratchDL import base as dl
 from scratchDL.base import layers as lyr
 from scratchDL.base import optm
 from scratchDL.base import loss
+from scratchDL.base import activation as act
 from scratchDL.base import NeuralNetwork
 
 from scratchDL.utils import train_test_split, to_categorical
@@ -53,7 +54,7 @@ def main():
                 activation='tanh',
                 bptt_trunc=5, 
                 input_shape=(10, 61)))
-    clf.add(lyr.Activation('softmax'))
+    clf.add(lyr.Activation(act.Softmax))
 
     clf.summary('RNN')
 

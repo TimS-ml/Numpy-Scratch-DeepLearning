@@ -5,7 +5,7 @@ import numpy as np
 from tqdm import tqdm
 from sklearn import datasets
 
-from scratchDL.utils import train_test_split, to_categorical, normalize, accuracy_score
+from scratchDL.utils import train_test_split, to_categorical, normalize
 from scratchDL.base.activation import Sigmoid
 from scratchDL.base.loss import CrossEntropy, SquareLoss
 from scratchDL.utils import Plot

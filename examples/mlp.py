@@ -9,6 +9,7 @@ from scratchDL import base as dl
 from scratchDL.base import layers as lyr
 from scratchDL.base import optm
 from scratchDL.base import loss
+from scratchDL.base import activation as act
 from scratchDL.base import NeuralNetwork
 
 from scratchDL.utils import train_test_split, to_categorical
@@ -37,18 +38,18 @@ def main():
                 validation_data=(X_test, y_test))
 
     clf.add(lyr.Dense(n_hidden, input_shape=(n_features, )))
-    clf.add(lyr.Activation('leaky_relu'))
+    clf.add(lyr.Activation(act.LeakyReLU))
     clf.add(lyr.Dense(n_hidden))
-    clf.add(lyr.Activation('leaky_relu'))
+    clf.add(lyr.Activation(act.LeakyReLU))
     clf.add(lyr.Dropout(0.25))
     clf.add(lyr.Dense(n_hidden))
-    clf.add(lyr.Activation('leaky_relu'))
+    clf.add(lyr.Activation(act.LeakyReLU))
     clf.add(lyr.Dropout(0.25))
     clf.add(lyr.Dense(n_hidden))
-    clf.add(lyr.Activation('leaky_relu'))
+    clf.add(lyr.Activation(act.LeakyReLU))
     clf.add(lyr.Dropout(0.25))
     clf.add(lyr.Dense(10))
-    clf.add(lyr.Activation('softmax'))
+    clf.add(lyr.Activation(act.Softmax))
 
     print()
     clf.summary(name='MLP')

@@ -6,6 +6,7 @@ from scratchDL import base as dl
 from scratchDL.base import layers as lyr
 from scratchDL.base import optm
 from scratchDL.base import loss
+from scratchDL.base import activation as act
 from scratchDL.base import NeuralNetwork
 from scratchDL.models import DeepQNetwork
 
@@ -26,7 +27,7 @@ def main():
                 optimizer=optm.Adam(), 
                 loss=loss.SquareLoss)
         clf.add(lyr.Dense(64, input_shape=(n_inputs, )))
-        clf.add(lyr.Activation('relu'))
+        clf.add(lyr.Activation(act.ReLU))
         clf.add(lyr.Dense(n_outputs))
         return clf
 

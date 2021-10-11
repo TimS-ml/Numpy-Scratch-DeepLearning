@@ -1,3 +1,5 @@
+# check `nn.train_on_batch`
+
 from __future__ import division
 
 import numpy as np
@@ -11,6 +13,7 @@ class Loss(object):
     def grad(self, y, y_pred):
         raise NotImplementedError()
 
+    # you don't need this in regression
     def acc(self, y, y_pred):
         return 0
 
@@ -23,22 +26,22 @@ class SquareLoss(Loss):
         return 0.5 * np.power((y - y_pred), 2)
 
     def grad(self, y, y_pred):
-        return -(y - y_pred)
+        return - (y - y_pred)
 
 
 class CrossEntropy(Loss):
     def __init__(self):
-        pass
+        self.eps = 1e-15
 
-    def loss(self, y, p):
+    def loss(self, y, y_pred):
         # Avoid division by zero
-        p = np.clip(p, 1e-15, 1 - 1e-15)
-        return -y * np.log(p) - (1 - y) * np.log(1 - p)
+        y_pred = np.clip(y_pred, self.eps, 1 - self.eps)
+        return - y * np.log(y_pred) - (1 - y) * np.log(1 - y_pred)
 
-    def acc(self, y, p):
-        return accuracy_score(np.argmax(y, axis=1), np.argmax(p, axis=1))
+    def acc(self, y, y_pred):
+        return accuracy_score(np.argmax(y, axis=1), np.argmax(y_pred, axis=1))
 
-    def grad(self, y, p):
+    def grad(self, y, y_pred):
         # Avoid division by zero
-        p = np.clip(p, 1e-15, 1 - 1e-15)
-        return -(y / p) + (1 - y) / (1 - p)
+        y_pred = np.clip(y_pred, self.eps, 1 - self.eps)
+        return - (y / y_pred) + (1 - y) / (1 - y_pred)
