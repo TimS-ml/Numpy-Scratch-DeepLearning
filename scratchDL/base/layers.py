@@ -7,8 +7,8 @@ import copy
 
 class Layer(object):
     def set_input_shape(self, shape):
-        """ Sets the shape that the layer expects of the input in the forward
-        pass method """
+        """ Sets the shape that the layer expects of the input in the 
+        forward pass method """
         self.input_shape = shape
 
     def layer_name(self):

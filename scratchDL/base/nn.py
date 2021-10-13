@@ -59,11 +59,14 @@ class NeuralNetwork():
 
     def train_on_batch(self, X, y):
         """ Single gradient update over one batch of samples """
+        # Forward pass
         y_pred = self._forward_pass(X)
         loss = np.mean(self.loss_function.loss(y, y_pred))
         acc = self.loss_function.acc(y, y_pred)
+
         # Calculate the gradient of the loss function wrt y_pred
         loss_grad = self.loss_function.grad(y, y_pred)
+
         # Backpropagate. Update weights
         self._backward_pass(loss_grad=loss_grad)
 
@@ -71,9 +74,12 @@ class NeuralNetwork():
 
     def fit(self, X, y, n_epochs, batch_size):
         """ Trains the model for a fixed number of epochs """
+        steps = 0
+
         for epo in range(n_epochs):
-            if epo % 5 == 0:
+            if epo == steps:
                 print('Current: {}, %{}'.format(epo, 100 * epo / n_epochs))
+                steps += n_epochs // 5
 
             batch_error = []
             for X_batch, y_batch in batch_iterator(X, y,

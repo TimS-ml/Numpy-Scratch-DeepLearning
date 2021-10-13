@@ -93,4 +93,4 @@ def main(X_train, X_test, y_train, y_test):
 
 
 if __name__ == "__main__":
-    main()
+    main(X_train, X_test, y_train, y_test)
