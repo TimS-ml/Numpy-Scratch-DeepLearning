@@ -10,6 +10,8 @@
 
 
 # About This Repo
+So I like https://github.com/ddbourgin/numpy-ml and https://github.com/geohot/tinygrad but they are not simple enough
+
 The Ultimate Goal:
 - Keep the dependency simple (mainly numpy)
 - Eazy migration from PyTorch, while keep the code structure simple
