@@ -9,25 +9,14 @@
 ```
 
 
-# About this repo
-I want to run machine learning and deep leanring on my arm devices for fun (iPad, Android Phone, Raspberry pi)
-
-The ultimate goal is to achieve something like [numpy-ml](https://github.com/ddbourgin/numpy-ml/tree/master/numpy_ml/neural_nets) and [tinygrad](https://github.com/geohot/tinygrad)
-
-References:
-- https://github.com/SethHWeidman/DLFS_code/tree/master/lincoln/lincoln
-- https://github.com/eriklindernoren/ML-From-Scratch
-- https://github.com/ddbourgin/numpy-ml
-- https://github.com/karpathy/micrograd
-- https://github.com/geohot/tinygrad
-
-
-Check my other repos: 
-- https://github.com/TimS-ml/Scratch-ML
-- https://github.com/TimS-ml/Scratch-DL
-- https://github.com/TimS-ml/My-ML
-- https://github.com/TimS-ml/My-Algo
-
+# About This Repo
+The Ultimate Goal:
+- Keep the dependency simple (mainly numpy)
+- Eazy migration from PyTorch, while keep the code structure simple
+- Support datasets from sklearn and torch
+- Implement models with the complexity of YOLO and Transformer
+- Numpy GPU acceleration (so decient speed)
+- C++ version
 
 
 # Quick Start
@@ -70,35 +59,3 @@ clf.add(lyr.BatchNorm())
 clf.add(lyr.Dense(10))
 clf.add(lyr.Activation(act.Softmax))
 ```
-
-
-# Data Inputs
-You can find dataset here:
-- `sklearn.datasets`
-- `torch`, `torchtext`, `torchvision`
-- `gym`
-- `pyglet`
-
-
-# TODO
-- [ ] Features
-  - [ ] Weight Init Func
-- [ ] Re-Design
-  - [ ] Batch / Channel / 1-dim shape
-  - [ ] Param / NonParam Layers
-  - [ ] PyOpenCL or CuPy for Nvidia and AMD GPU
-    - [ ] `scratchDL.Tensor` and `Tensor.gpu`
-    - check: https://github.com/geohot/tinygrad/blob/master/tinygrad/ops_gpu.py
-  - [ ] CPU Parallel Programming with numpy and scipy
-- [ ] Add more models
-  - [ ] Transformer
-  - [ ] VGG
-  - [ ] Inception
-  - [ ] Efficientnet
-- [x] Reduce package usage
-  - [x] Update `setup.py` with `setup_require` and `extras_require`
-
-## Pending
-- [ ] Roughly compatible with PyTorch and sk-learn
-  - [ ] Function name, operations, forward, backward etc.
-    - [ ] Re-write implementations of `scratchDL.base`
